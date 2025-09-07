@@ -1,10 +1,9 @@
 import mongoose from "mongoose";
 
 const MONGODB_URI =
-  process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/learnnode";
+  "mongodb+srv://designdynasty84_db_user:7gxChkyKhSIBBe8l@cluster0.om8d8e8.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 
 export async function connectMongo() {
-  // 1 = connected, 2 = connecting
   if (
     mongoose.connection.readyState === 1 ||
     mongoose.connection.readyState === 2
