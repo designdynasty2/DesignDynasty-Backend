@@ -9,7 +9,7 @@ import { connectMongo } from "./db/mongoose.js";
 const app = express();
 
 // Allow your frontend origin (adjust as needed)
-const ALLOWED_ORIGIN = process.env.FRONTEND_ORIGIN || "http://localhost:5173";
+const ALLOWED_ORIGIN = process.env.FRONTEND_ORIGIN || "https://www.thedesigndynasty.com/";
 
 app.use(
   cors({
