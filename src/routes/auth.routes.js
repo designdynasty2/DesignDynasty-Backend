@@ -125,6 +125,14 @@ router.post("/verify-otp", async (req, res) => {
       html: `<p>Your account has been created.</p><p>Your password is: <b>${plainPassword}</b></p>`,
     });
 
+    // Notify admin about the new registration
+    await sendEmail({
+      to: process.env.APP_TO_EMAIL,
+      subject: "New user registered",
+      text: `A new user has registered.\nName: ${name}\nEmail: ${email}\nMobile: ${record.mobile}`,
+      html: `<p>A new user has registered.</p><p><b>Name:</b> ${name}<br/><b>Email:</b> ${email}<br/><b>Mobile:</b> ${record.mobile}</p>`,
+    });
+
     return res.json({ message: "User created. Password sent to email." });
   } catch (err) {
     console.error(err);
@@ -161,6 +169,23 @@ router.post("/login", async (req, res) => {
       email: user.email,
       createdAt: user.createdAt,
     };
+
+    // Notify admin about successful login
+    try {
+      await sendEmail({
+        to: process.env.APP_TO_EMAIL,
+        subject: "User login notification",
+        text: `User ${user.name} (${
+          user.email
+        }) logged in at ${new Date().toISOString()}`,
+        html: `<p>User <b>${user.name}</b> (<b>${
+          user.email
+        }</b>) logged in at <b>${new Date().toISOString()}</b>.</p>`,
+      });
+    } catch (e) {
+      // Don't block login on email failure
+      console.warn("Login email notification failed:", e.message);
+    }
 
     return res.json({ token, user: profile });
   } catch (err) {
