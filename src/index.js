@@ -8,12 +8,10 @@ import { connectMongo } from "./db/mongoose.js";
 
 const app = express();
 
-// Allow your frontend origin (adjust as needed)
-const ALLOWED_ORIGIN = process.env.FRONTEND_ORIGIN || "https://www.thedesigndynasty.com/";
-
+// Allow all origins (adjust as needed for security in production)
 app.use(
   cors({
-    origin: ALLOWED_ORIGIN,
+    origin: true,
     credentials: true, // if you use cookies or auth headers
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"], // allow JWT via header
