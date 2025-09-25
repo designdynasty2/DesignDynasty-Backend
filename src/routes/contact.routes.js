@@ -33,7 +33,7 @@ const upload = multer({
 const briefContactSchema = Joi.object({
   name: Joi.string().min(3).required(),
   email: Joi.string().email().required(),
-  mobile: Joi.string().pattern(/^[0-9]{10,15}$/).required(),
+  mobile: Joi.string().required(),
   company: Joi.string().min(2).required(),
   service: Joi.string().required(),
   projectDetails: Joi.string().min(3).required(),
