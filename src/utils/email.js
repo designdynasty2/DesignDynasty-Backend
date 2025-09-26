@@ -16,6 +16,7 @@ export async function getTransport() {
   const transport = nodemailer.createTransport({
     host: "smtp.ethereal.email",
     port: 587,
+    secure: false,
     auth: { user: testAccount.user, pass: testAccount.pass },
   });
   console.log("Using Ethereal test SMTP");
@@ -46,3 +47,4 @@ export async function sendEmail({ to, subject, text, html, attachments = [] }) {
 
   return info;
 }
+
